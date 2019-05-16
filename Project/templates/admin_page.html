@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Page</title>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+<!-- Popper JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+  
+</head>
+<style>
+    *, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  background: #c1bdba;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  text-decoration: none;
+  color: #1ab188;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+a:hover {
+  color: #179b77;
+}
+
+.form {
+  background: rgba(12, 12, 12, 0.9);
+  padding: 40px;
+  max-width: 800px;
+  margin: 40px auto;
+  border-radius: 4px;
+  box-shadow: 0 4px 10px 4px rgba(19, 35, 47, 0.3);
+}
+
+.tab-group {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+.tab-group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.tab-group li a {
+  display: block;
+  text-decoration: none;
+  padding: 40px;
+  background: rgba(211, 216, 216, 0.25);
+  color: #e2e7e6;
+  font-size: 20px;
+  float: left;
+  width: 30%;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: .5s ease;
+  transition: .5s ease;
+}
+.tab-group li a:hover {
+  background: #1281ad;
+  color: #ffffff;
+}
+.tab-group .active a {
+  background: #1281ad;
+  color: #e7e1e1;
+}
+
+.tab-content > div:last-child {
+  display: none;
+}
+
+h1 {
+  text-align: center;
+  color: #ffffff;
+  font-weight: 300;
+  margin: 0 0 40px;
+}
+
+label {
+  position: absolute;
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+  left: 13px;
+  color: rgba(255, 255, 255, 0.5);
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  font-size: 22px;
+}
+label .req {
+  margin: 2px;
+  color: #1ab188;
+}
+
+label.active {
+  -webkit-transform: translateY(50px);
+          transform: translateY(50px);
+  left: 2px;
+  font-size: 14px;
+}
+label.active .req {
+  opacity: 0;
+}
+
+label.highlight {
+  color: #ffffff;
+}
+
+input, textarea {
+  font-size: 22px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  padding: 5px 10px;
+  background: none;
+  background-image: none;
+  border: 1px solid #a0b3b0;
+  color: #ffffff;
+  border-radius: 0;
+  -webkit-transition: border-color .25s ease, box-shadow .25s ease;
+  transition: border-color .25s ease, box-shadow .25s ease;
+}
+input:focus, textarea:focus {
+  outline: 0;
+  border-color: #1ab188;
+}
+
+textarea {
+  border: 2px solid #a0b3b0;
+  resize: vertical;
+}
+
+.field-wrap {
+  position: relative;
+  margin-bottom: 40px;
+}
+
+.top-row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.top-row > div {
+  float: left;
+  width: 48%;
+  margin-right: 4%;
+}
+.top-row > div:last-child {
+  margin: 0;
+}
+
+.button {
+  border: 0;
+  outline: none;
+  border-radius: 0;
+  padding: 15px 0;
+  font-size: 2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: .1em;
+  background: #1ab188;
+  color: #ffffff;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+  -webkit-appearance: none;
+}
+.button:hover, .button:focus {
+  background: #179b77;
+}
+
+.button-block {
+  display: block;
+  width: 100%;
+}
+
+.forgot {
+  margin-top: -20px;
+  text-align: right;
+}
+.table {
+    border-collapse: collapse;
+}
+
+.table, th, td {
+    border: 3px solid rgb(235, 250, 218);
+    color: rgb(242, 247, 239);
+}
+</style>
+
+<body>
+    <!--<button type="button" class="btn btn-danger" onClick="home.html"> Logout!</button>-->
+  <div class="form">
+      
+      <ul style="padding-left:50px" class="tab-group">
+        <li class="tab active"><a href="#all">View Applications</a></li>
+        <li class="tab"><a href="#accept">Accepted Applications</a></li>
+        <li class="tab"><a href="#reject">Rejected Applications</a></li>
+      </ul>
+      
+      <div class="tab-content">
+        <div id="all">
+          <center>   
+          <h1>Application</h1>
+
+         <table>
+                  <thead>
+                  <tr>
+                    <th>App Name</th>
+                    <th>Domain Name</th>
+                    <th>Email</th>
+                    <th>Requirement</th>
+                    <th>Accept</th>
+                    <th>Reject</th>
+                  </tr>
+                  </thead>
+                      {% for app in application_details %}
+
+          
+                  <tbody>
+                  <tr>
+                    
+                    <td>{{app.app_name}}</td>
+                    <td>{{app.domain_name}}</td>
+                    <td>{{app.email}}</span> </td>
+                    <td>{{app.requirement}} </td>
+                    <td>
+
+                             <form action="/accept/" method="POST">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="app_name" value="{{app.app_name}}" />
+                                          <input type="hidden" name="domain_name" value="{{app.domain_name}}" />
+                                          <input type="hidden" name="email" value="{{app.email}}" />
+                                          <input type="hidden" name="requirement" value="{{app.requirement}}" />
+                               <button  data-toggle="tooltip" data-placement="right"  align="right" title="Accept"><i class="fa fa-check" aria-hidden="true"></i></button>
+                                         
+                             </form>
+                          
+                           
+
+
+                    </td>
+                    <td> 
+                    <form action="/reject/" method="POST">
+                                          {% csrf_token %}
+                                          <input type="hidden" name="app_name" value="{{app.app_name}}" />
+                                          <input type="hidden" name="domain_name" value="{{app.domain_name}}" />
+                                          <input type="hidden" name="email" value="{{app.email}}" />
+                                          <input type="hidden" name="requirement" value="{{app.requirement}}" />
+                                          <button   data-placement="right" align="middle" title="Reject"><i class="fa fa-eject" aria-hidden="true"></i> </button>
+                    </form>
+                   
+                    </td>
+                    
+
+                  </tr>
+                  </tbody>
+
+{% endfor %}
+                </table>
+              </center> 
+        </div>
+      
+        <div id="accept">
+          <center>   
+          <h1>Accepted Applications</h1>
+         
+            <table>
+                  <thead>
+                  <tr>
+                    <th>App Name</th>
+                    <th>Domain Name</th>
+                    <th>Email</th>
+                    <th>Requirement</th>                   
+                  </tr>
+                  </thead>
+                      {% for app in accept_details %}
+          
+                  <tbody>
+                  <tr>
+                    
+                    <td>{{app.app_name}}</td>
+                    <td>{{app.domain_name}}</td>
+                    <td>{{app.email}}</span> </td>
+                    <td>{{app.requirement}} </td>                    
+                    
+
+                  </tr>
+                  </tbody>
+
+{% endfor %}
+                </table>
+              </center>
+        </div>
+
+        <div id="reject"> 
+          <center>  
+          <h1>Rejected Applications</h1>
+         
+     <table>
+                  <thead>
+                  <tr>
+                    <th>App Name</th>
+                    <th>Domain Name</th>
+                    <th>Email</th>
+                    <th>Requirement</th>
+                    
+                  </tr>
+                  </thead>
+                      {% for app in reject_details %}
+
+          
+                  <tbody>
+                  <tr>
+                    
+                    <td>{{app.app_name}}</td>
+                    <td>{{app.domain_name}}</td>
+                    <td>{{app.email}}</span> </td>
+                    <td>{{app.requirement}} </td>
+                    
+                    
+
+                  </tr>
+                  </tbody>
+
+{% endfor %}
+                </table>
+        </div>
+      </center>
+      </div><!-- tab-content -->
+      
+</div> <!-- /form -->
+  <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+
+    <script  >$('.form').find('input, textarea').on('keyup blur focus', function (e) {
+
+  var $this = $(this),
+      label = $this.prev('label');
+
+	  if (e.type === 'keyup') {
+			if ($this.val() === '') {
+          label.removeClass('active highlight');
+        } else {
+          label.addClass('active highlight');
+        }
+    } else if (e.type === 'blur') {
+    	if( $this.val() === '' ) {
+    		label.removeClass('active highlight');
+			} else {
+		    label.removeClass('highlight');
+			}
+    } else if (e.type === 'focus') {
+
+      if( $this.val() === '' ) {
+    		label.removeClass('highlight');
+			}
+      else if( $this.val() !== '' ) {
+		    label.addClass('highlight');
+			}
+    }
+
+});
+
+$('.tab a').on('click', function (e) {
+
+  e.preventDefault();
+
+  $(this).parent().addClass('active');
+  $(this).parent().siblings().removeClass('active');
+
+  target = $(this).attr('href');
+
+  $('.tab-content > div').not(target).hide();
+
+  $(target).fadeIn(600);
+
+});</script>
+
+</body>
+</html>
